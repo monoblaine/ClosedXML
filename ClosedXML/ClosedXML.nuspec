@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>igitur</authors>
+    <owners>igitur</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ClosedXML makes it easier for developers to create Excel 2007+ (.xlsx, .xlsm, etc) files. It provides a nice object oriented way to manipulate the files (similar to VBA) without dealing with the hassles of XML Documents. It can be used by any .NET language like C# and VisualBasic.NET.</description>
+    <copyright>Copyright 2017</copyright>
+  </metadata>
+</package>
