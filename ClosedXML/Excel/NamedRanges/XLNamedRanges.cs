@@ -71,7 +71,7 @@ namespace ClosedXML.Excel
         /// <exception cref="ArgumentException">
         /// For named ranges in the workbook scope, specify the sheet name in the reference.
         /// </exception>
-        internal IXLNamedRange Add(String rangeName, String rangeAddress, String comment, Boolean validateName, Boolean validateRangeAddress)
+        public IXLNamedRange Add(String rangeName, String rangeAddress, String comment, Boolean validateName, Boolean validateRangeAddress)
         {
             // When loading named ranges from an existing file, we do not validate the range address or name.
             if (validateRangeAddress)

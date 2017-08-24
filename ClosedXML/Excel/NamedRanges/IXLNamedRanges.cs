@@ -43,6 +43,20 @@ namespace ClosedXML.Excel
         IXLNamedRange Add(String rangeName, String rangeAddress, String comment);
 
         /// <summary>
+        /// Adds the specified range name.
+        /// </summary>
+        /// <param name="rangeName">Name of the range.</param>
+        /// <param name="rangeAddress">The range address.</param>
+        /// <param name="comment">The comment.</param>
+        /// <param name="validateName">if set to <c>true</c> validates the name.</param>
+        /// <param name="validateRangeAddress">if set to <c>true</c> range address will be checked for validity.</param>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ArgumentException">
+        /// For named ranges in the workbook scope, specify the sheet name in the reference.
+        /// </exception>
+        IXLNamedRange Add(String rangeName, String rangeAddress, String comment, Boolean validateName, Boolean validateRangeAddress);
+
+        /// <summary>
         /// Adds a new named range.
         /// </summary>
         /// <param name="rangeName">Name of the ranges to add.</param>
