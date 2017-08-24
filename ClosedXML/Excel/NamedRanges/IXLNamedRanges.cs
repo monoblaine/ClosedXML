@@ -47,6 +47,16 @@ namespace ClosedXML.Excel
         /// Adds a new named range.
         /// </summary>
         /// <param name="rangeName">Name of the ranges to add.</param>
+        /// <param name="ranges">The ranges to add.</param>
+        /// <param name="comment">The comment for the new named range.</param>
+        /// <param name="acceptInvalidReferences">if set to <c>true</c> range address will not be checked for validity. Necessary when loading files as is.</param>
+        /// <returns></returns>
+        IXLNamedRange Add(String rangeName, String ranges, String comment, bool acceptInvalidReferences);
+
+        /// <summary>
+        /// Adds a new named range.
+        /// </summary>
+        /// <param name="rangeName">Name of the ranges to add.</param>
         /// <param name="range">The range to add.</param>
         /// <param name="comment">The comment for the new named range.</param>
         IXLNamedRange Add(String rangeName, IXLRange range, String comment);

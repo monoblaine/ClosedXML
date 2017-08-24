@@ -61,7 +61,7 @@ namespace ClosedXML.Excel
         /// <param name="acceptInvalidReferences">if set to <c>true</c> range address will not be checked for validity. Necessary when loading files as is.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentException">For named ranges in the workbook scope, specify the sheet name in the reference.</exception>
-        internal IXLNamedRange Add(String rangeName, String rangeAddress, String comment, bool acceptInvalidReferences)
+        public IXLNamedRange Add(String rangeName, String rangeAddress, String comment, bool acceptInvalidReferences)
         {
             if (!acceptInvalidReferences)
             {
