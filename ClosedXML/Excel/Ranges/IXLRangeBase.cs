@@ -240,6 +240,14 @@ namespace ClosedXML.Excel
 
         Boolean IsMerged();
 
+        Boolean IsMergedOnlyHorizontally();
+
+        Boolean IsMergedOnlyVertically();
+
+        Boolean SpansMultipleColumns();
+
+        Boolean SpansMultipleRows();
+
         Boolean IsEmpty();
 
         Boolean IsEmpty(XLCellsUsedOptions options);

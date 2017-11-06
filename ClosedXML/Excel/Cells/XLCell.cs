@@ -1109,6 +1109,20 @@ namespace ClosedXML.Excel
                 .FirstOrDefault();
         }
 
+        public Boolean IsMergedOnlyHorizontally()
+        {
+            return Worksheet.Internals.MergedRanges
+                .Where(r => r.Contains(this))
+                .All(r => !r.SpansMultipleRows());
+        }
+
+        public Boolean IsMergedOnlyVertically()
+        {
+            return Worksheet.Internals.MergedRanges
+                .Where(r => r.Contains(this))
+                .All(r => !r.SpansMultipleColumns());
+        }
+
         public Boolean IsEmpty()
         {
             return IsEmpty(XLCellsUsedOptions.AllContents);

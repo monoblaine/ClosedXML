@@ -481,6 +481,10 @@ namespace ClosedXML.Excel
 
         Boolean IsMerged();
 
+        Boolean IsMergedOnlyHorizontally ();
+
+        Boolean IsMergedOnlyVertically ();
+
         IXLRange MergedRange();
 
         void Select();

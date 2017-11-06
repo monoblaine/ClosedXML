@@ -229,7 +229,7 @@ namespace ClosedXML.Excel
                 // Clear maintains capacity -> reduce need for GC
                 glyphs.Clear();
 
-                if (cell.IsMerged())
+                if (cell.IsMerged() && !cell.IsMergedOnlyVertically())
                     continue;
 
                 // Reuse styles if possible to reduce memory consumption
