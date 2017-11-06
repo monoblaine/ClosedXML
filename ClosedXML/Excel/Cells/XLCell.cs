@@ -1166,6 +1166,20 @@ namespace ClosedXML.Excel
             return Worksheet.Internals.MergedRanges.Any(r => r.Contains(this));
         }
 
+        public Boolean IsMergedOnlyHorizontally()
+        {
+            return Worksheet.Internals.MergedRanges
+                .Where(r => r.Contains(this))
+                .All(r => !r.SpansMultipleRows());
+        }
+
+        public Boolean IsMergedOnlyVertically()
+        {
+            return Worksheet.Internals.MergedRanges
+                .Where(r => r.Contains(this))
+                .All(r => !r.SpansMultipleColumns());
+        }
+
         public Boolean IsEmpty()
         {
             return IsEmpty(false);

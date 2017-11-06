@@ -286,7 +286,7 @@ namespace ClosedXML.Excel
         {
             var fontCache = new Dictionary<IXLFontBase, Font>();
             Double rowMaxHeight = minHeight;
-            foreach (XLCell c in from XLCell c in Row(startColumn, endColumn).CellsUsed() where !c.IsMerged() select c)
+            foreach (XLCell c in from XLCell c in Row(startColumn, endColumn).CellsUsed() where !c.IsMerged() || c.IsMergedOnlyVertically() select c)
             {
                 Double thisHeight;
                 Int32 textRotation = c.Style.Alignment.TextRotation;

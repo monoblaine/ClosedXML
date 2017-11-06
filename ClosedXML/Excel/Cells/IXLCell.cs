@@ -305,6 +305,8 @@ namespace ClosedXML.Excel
         Boolean HasComment { get; }
 
         Boolean IsMerged();
+        Boolean IsMergedOnlyHorizontally();
+        Boolean IsMergedOnlyVertically();
         Boolean IsEmpty();
         Boolean IsEmpty(Boolean includeFormats);
 

@@ -506,6 +506,26 @@ namespace ClosedXML.Excel
             return Cells().Any(c => c.IsMerged());
         }
 
+        public Boolean IsMergedOnlyHorizontally()
+        {
+            return Cells().Any(c => c.IsMergedOnlyHorizontally());
+        }
+
+        public Boolean IsMergedOnlyVertically()
+        {
+            return Cells().Any(c => c.IsMergedOnlyVertically());
+        }
+
+        public Boolean SpansMultipleColumns()
+        {
+            return Cells().Select(c => c.Address.ColumnNumber).Distinct().Count() > 1;
+        }
+
+        public Boolean SpansMultipleRows()
+        {
+            return Cells().Select(c => c.Address.RowNumber).Distinct().Count() > 1;
+        }
+
         public virtual Boolean IsEmpty()
         {
             return !CellsUsed().Any() || CellsUsed().Any(c => c.IsEmpty());

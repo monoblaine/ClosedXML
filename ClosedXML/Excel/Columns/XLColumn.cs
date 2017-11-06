@@ -312,7 +312,7 @@ namespace ClosedXML.Excel
 
             foreach (XLCell c in Column(startRow, endRow).CellsUsed())
             {
-                if (c.IsMerged()) continue;
+                if (c.IsMerged() && !c.IsMergedOnlyVertically()) continue;
 
                 Double thisWidthMax = 0;
                 Int32 textRotation = c.Style.Alignment.TextRotation;
