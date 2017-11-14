@@ -6,12 +6,18 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
 [assembly: CLSCompliantAttribute(true)]
+[assembly: InternalsVisibleTo("ClosedXML_Examples, PublicKey=002400000480000094000000060200000024000052534131" +
+                              "0004000001000100a1fb8ba59167fe734d64128ca73d32c45cb8a117246d09c95c8769db88fe33" +
+                              "2b0a3396bedd0ea48ee42b0e5796fec0798ca5cb628a9a6de80d35d6c67b936ca1670347b3d4f2" +
+                              "b769c8ce2ddcf959dbac6bcd88e6c08751ea1fffa0522de3507193e7035305a8aa008d6c88cca1" +
+                              "341b3120fa9c347ab3f97e2d772e2709277da5")]
 
 namespace ClosedXML.Excel
 {
@@ -47,7 +53,7 @@ namespace ClosedXML.Excel
             return new string(chars);
         }
 
-        public static String RemoveSpecialCharacters(this String str)
+        internal static String RemoveSpecialCharacters(this String str)
         {
             StringBuilder sb = new StringBuilder();
             foreach (char c in str)
@@ -60,12 +66,12 @@ namespace ClosedXML.Excel
             return sb.ToString();
         }
 
-        public static Int32 CharCount(this String instance, Char c)
+        internal static Int32 CharCount(this String instance, Char c)
         {
             return instance.Length - instance.Replace(c.ToString(), "").Length;
         }
 
-        public static Boolean HasDuplicates<T>(this IEnumerable<T> source)
+        internal static Boolean HasDuplicates<T>(this IEnumerable<T> source)
         {
             HashSet<T> distinctItems = new HashSet<T>();
             foreach (var item in source)
@@ -78,13 +84,13 @@ namespace ClosedXML.Excel
             return false;
         }
 
-        public static T CastTo<T>(this Object o)
+        internal static T CastTo<T>(this Object o)
         {
             return (T)Convert.ChangeType(o, typeof(T));
         }
     }
 
-    public static class DictionaryExtensions
+    internal static class DictionaryExtensions
     {
         public static void RemoveAll<TKey, TValue>(this Dictionary<TKey, TValue> dic,
             Func<TValue, bool> predicate)
@@ -97,7 +103,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         private static readonly Regex RegexNewLine = new Regex(@"((?<!\r)\n|\r\n)", RegexOptions.Compiled);
 
@@ -134,7 +140,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class DateTimeExtensions
+    internal static class DateTimeExtensions
     {
         public static Double MaxOADate
         {
@@ -170,7 +176,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class IntegerExtensions
+    internal static class IntegerExtensions
     {
         public static String ToInvariantString(this Int32 value)
         {
@@ -178,7 +184,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class DecimalExtensions
+    internal static class DecimalExtensions
     {
         //All numbers are stored in XL files as invarient culture this is just a easy helper
         public static String ToInvariantString(this Decimal value)
@@ -192,7 +198,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class DoubleExtensions
+    internal static class DoubleExtensions
     {
         //All numbers are stored in XL files as invarient culture this is just a easy helper
         public static String ToInvariantString(this Double value)
@@ -206,7 +212,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class FontBaseExtensions
+    internal static class FontBaseExtensions
     {
         private static Font GetCachedFont(IXLFontBase fontBase, Dictionary<IXLFontBase, Font> fontCache)
         {
@@ -277,7 +283,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class EnumerableExtensions
+    internal static class EnumerableExtensions
     {
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
@@ -291,7 +297,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class ListExtensions
+    internal static class ListExtensions
     {
         public static void RemoveAll<T>(this IList<T> list, Func<T, bool> predicate)
         {
@@ -303,7 +309,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class DoubleValueExtensions
+    internal static class DoubleValueExtensions
     {
         public static DoubleValue SaveRound(this DoubleValue value)
         {
@@ -311,7 +317,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
         public static bool IsNumber(this Type type)
         {
@@ -329,7 +335,7 @@ namespace ClosedXML.Excel
         }
     }
 
-    public static class ObjectExtensions
+    internal static class ObjectExtensions
     {
         public static bool IsNumber(this object value)
         {
