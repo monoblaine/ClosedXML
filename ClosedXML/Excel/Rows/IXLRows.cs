@@ -16,6 +16,13 @@ namespace ClosedXML.Excel
         Double Height { set; }
 
         /// <summary>
+        /// Sets the height of all rows
+        /// </summary>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        IXLRows SetHeight(Double height);
+
+        /// <summary>
         /// Deletes all rows and shifts the rows below them accordingly.
         /// </summary>
         void Delete();

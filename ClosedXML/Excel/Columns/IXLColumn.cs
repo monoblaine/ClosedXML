@@ -16,6 +16,13 @@ namespace ClosedXML.Excel
         Double Width { get; set; }
 
         /// <summary>
+        /// Sets the width of this column
+        /// </summary>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        IXLColumn SetWidth(Double width);
+
+        /// <summary>
         /// Deletes this column and shifts the columns at the right of this one accordingly.
         /// </summary>
         /// <remarks>Don't use in a loop due to poor performance. Use <see cref="IXLRange.Delete(XLShiftDeletedCells)"/> instead.</remarks>

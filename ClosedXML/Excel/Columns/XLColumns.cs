@@ -54,6 +54,13 @@ namespace ClosedXML.Excel
             }
         }
 
+        public IXLColumns SetWidth(Double width)
+        {
+            Width = width;
+
+            return this;
+        }
+
         public void Delete()
         {
             if (_worksheet != null)

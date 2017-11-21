@@ -66,6 +66,13 @@ namespace ClosedXML.Excel
 
         IXLCells IXLColumn.Cells(Int32 firstRow, Int32 lastRow) => Cells(firstRow, lastRow);
 
+        public IXLColumn SetWidth(Double width)
+        {
+            Width = width;
+
+            return this;
+        }
+
         public void Delete()
         {
             int columnNumber = ColumnNumber();

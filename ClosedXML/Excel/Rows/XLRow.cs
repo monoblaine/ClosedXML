@@ -146,6 +146,13 @@ namespace ClosedXML.Excel
             }
         }
 
+        public IXLRow SetHeight(Double height)
+        {
+            Height = height;
+
+            return this;
+        }
+
         IXLCells IXLRow.Cells(String cellsInRow) => Cells(cellsInRow);
 
         IXLCells IXLRow.Cells(Int32 firstColumn, Int32 lastColumn) => Cells(firstColumn, lastColumn);
