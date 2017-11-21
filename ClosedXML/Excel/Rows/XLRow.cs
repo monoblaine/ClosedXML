@@ -137,6 +137,13 @@ namespace ClosedXML.Excel
             }
         }
 
+        public IXLRow SetHeight(Double height)
+        {
+            Height = height;
+
+            return this;
+        }
+
         public void ClearHeight()
         {
             Height = Worksheet.RowHeight;

@@ -120,6 +120,13 @@ namespace ClosedXML.Excel
             }
         }
 
+        public IXLColumn SetWidth(Double width)
+        {
+            Width = width;
+
+            return this;
+        }
+
         public void Delete()
         {
             int columnNumber = ColumnNumber();

@@ -15,6 +15,13 @@ namespace ClosedXML.Excel
         Double Height { get; set; }
 
         /// <summary>
+        /// Sets the height of this row
+        /// </summary>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        IXLRow SetHeight(Double height);
+
+        /// <summary>
         /// Clears the height for the row and defaults it to the spreadsheet row height.
         /// </summary>
         void ClearHeight();

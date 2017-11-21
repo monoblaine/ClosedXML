@@ -59,6 +59,13 @@ namespace ClosedXML.Excel
             }
         }
 
+        public IXLRows SetHeight(Double height)
+        {
+            Height = height;
+
+            return this;
+        }
+
         public void Delete()
         {
             if (_worksheet != null)

@@ -14,6 +14,13 @@ namespace ClosedXML.Excel
         Double Width { set; }
 
         /// <summary>
+        /// Sets the width of all columns.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        IXLColumns SetWidth(Double width);
+
+        /// <summary>
         /// Deletes all columns and shifts the columns at the right of them accordingly.
         /// </summary>
         void Delete();
