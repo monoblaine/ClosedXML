@@ -291,5 +291,17 @@ namespace ClosedXML.Excel
         {
             return -657435 <= d && d < 2958466;
         }
+
+        public static IXLStyle ApplyLightRedFillWithDarkRedTextStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(156, 0, 6))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(255, 199, 206));
+        }
+
+        public static IXLStyle ApplyGreenFillWithDarkGreenTextStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(0, 97, 0))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(198, 239, 206));
+        }
     }
 }
