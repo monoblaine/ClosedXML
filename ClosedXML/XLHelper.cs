@@ -303,5 +303,11 @@ namespace ClosedXML.Excel
                 .Font.SetFontColor(XLColor.FromArgb(0, 97, 0))
                 .Fill.SetBackgroundColor(XLColor.FromArgb(198, 239, 206));
         }
+
+        public static IXLStyle ApplyYellowFillWithDarkYellowTextStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(156, 101, 0))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(255, 235, 156));
+        }
     }
 }
