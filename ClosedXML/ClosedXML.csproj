@@ -89,6 +89,7 @@
     <Compile Include="Extensions\OpenXmlPartContainerExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\XIXLRange.cs" />
+    <Compile Include="PredefinedFormats.cs" />
     <Compile Include="Utils\GraphicsUtils.cs" />
     <Compile Include="Utils\XmlEncoder.cs" />
     <Compile Include="XLHelper.cs" />
