@@ -9,32 +9,32 @@ namespace ClosedXML {
         /// <summary>
         /// General
         /// </summary>
-        public static readonly Int32 ID_0 = 0;
+        public static readonly Int32 ID_00 = 0;
 
         /// <summary>
         /// 0
         /// </summary>
-        public static readonly Int32 ID_1 = 1;
+        public static readonly Int32 ID_01 = 1;
 
         /// <summary>
         /// 0.00
         /// </summary>
-        public static readonly Int32 ID_2 = 2;
+        public static readonly Int32 ID_02 = 2;
 
         /// <summary>
         /// #,##0
         /// </summary>
-        public static readonly Int32 ID_3 = 3;
+        public static readonly Int32 ID_03 = 3;
 
         /// <summary>
         /// #,##0.00
         /// </summary>
-        public static readonly Int32 ID_4 = 4;
+        public static readonly Int32 ID_04 = 4;
 
         /// <summary>
         /// 0%
         /// </summary>
-        public static readonly Int32 ID_9 = 9;
+        public static readonly Int32 ID_09 = 9;
 
         /// <summary>
         /// 0.00%
