@@ -17,6 +17,8 @@
   <PropertyGroup>
     <!-- NU5104 - SixLabors.Fonts is available only as a prerelease -->
     <NoWarn>$(NoWarn);NU1605;NU5104;CS1591</NoWarn>
+    <AssemblyName>ClozedXML</AssemblyName>
+    <Product>ClozedXML</Product>
   </PropertyGroup>
 
   <ItemGroup>
