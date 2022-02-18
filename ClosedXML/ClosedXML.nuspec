@@ -9,5 +9,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ClosedXML makes it easier for developers to create Excel 2007+ (.xlsx, .xlsm, etc) files. It provides a nice object oriented way to manipulate the files (similar to VBA) without dealing with the hassles of XML Documents. It can be used by any .NET language like C# and VisualBasic.NET.</description>
     <copyright>Copyright 2017</copyright>
+    <repository type="git" url="https://github.com/monoblaine/package-registry.git" />
   </metadata>
 </package>
