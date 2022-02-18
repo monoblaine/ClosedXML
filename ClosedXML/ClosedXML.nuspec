@@ -11,6 +11,7 @@
     <projectUrl>https://github.com/ClosedXML/ClosedXML</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>@ClosedXML</copyright>
+    <repository type="git" url="https://github.com/monoblaine/package-registry.git" />
     <tags>ClosedXML</tags>
   </metadata>
   <files>
