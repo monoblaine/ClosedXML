@@ -1,2 +1,3 @@
-nuget pack .\ClosedXML.csproj -Prop Configuration=Release -OutputDirectory .\
-nuget push *.nupkg -Source GitHub
+nuget pack .\ClosedXML.csproj -Prop Configuration=Release -OutputDirectory .\ && ^
+nuget push *.nupkg -Source GitHub && ^
+del *.nupkg
