@@ -309,5 +309,11 @@ namespace ClosedXML.Excel
                 .Font.SetFontColor(XLColor.FromArgb(156, 101, 0))
                 .Fill.SetBackgroundColor(XLColor.FromArgb(255, 235, 156));
         }
+
+        public static IXLStyle ApplyMutedFillWithMutedTextStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(119, 119, 119))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(240, 240, 240));
+        }
     }
 }
