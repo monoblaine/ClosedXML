@@ -475,5 +475,17 @@ namespace ClosedXML.Excel
                 .Font.SetFontColor(XLColor.FromArgb(119, 119, 119))
                 .Fill.SetBackgroundColor(XLColor.FromArgb(240, 240, 240));
         }
+
+        public static IXLStyle ApplyDMYSlashedFormat (this IXLStyle style) {
+            return style
+                .DateFormat
+                .SetFormat(@"dd""/""mm""/""yyyy");
+        }
+
+        public static IXLStyle ApplyDMYHiTRSlashedFormat (this IXLStyle style) {
+            return style
+                .DateFormat
+                .SetFormat(@"dd""/""mm""/""yyyy\ hh"".""mm");
+        }
     }
 }
