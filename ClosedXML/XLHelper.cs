@@ -470,6 +470,30 @@ namespace ClosedXML.Excel
                 .Fill.SetBackgroundColor(XLColor.FromArgb(255, 235, 156));
         }
 
+        public static IXLStyle ApplyBootstrapInfoStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(49, 112, 143))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(217, 237, 247));
+        }
+
+        public static IXLStyle ApplyBootstrapDangerStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(169, 68, 66))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(242, 222, 222));
+        }
+
+        public static IXLStyle ApplyBootstrapSuccessStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(60, 118, 61))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(223, 240, 216));
+        }
+
+        public static IXLStyle ApplyBootstrapWarningStyle (this IXLStyle style) {
+            return style
+                .Font.SetFontColor(XLColor.FromArgb(138, 109, 59))
+                .Fill.SetBackgroundColor(XLColor.FromArgb(252, 248, 227));
+        }
+
         public static IXLStyle ApplyMutedFillWithMutedTextStyle (this IXLStyle style) {
             return style
                 .Font.SetFontColor(XLColor.FromArgb(119, 119, 119))
