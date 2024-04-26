@@ -511,5 +511,109 @@ namespace ClosedXML.Excel
                 .DateFormat
                 .SetFormat(@"dd""/""mm""/""yyyy\ hh"".""mm");
         }
+
+        private static Boolean IsInteger (this Single num) => Math.Floor(num) == Math.Ceiling(num);
+
+        private static Boolean IsInteger (this Double num) => Math.Floor(num) == Math.Ceiling(num);
+
+        private static Boolean IsInteger (this Decimal num) => Math.Floor(num) == Math.Ceiling(num);
+
+        private static StringBuilder AppendDecimalPart (this StringBuilder sb, Int32 numberOfDecimalPlaces, Boolean hideTrailingZerosInDecimalPart) {
+            var ch = hideTrailingZerosInDecimalPart ? '#' : '0';
+            for (var i = 0; i < numberOfDecimalPlaces; i++) {
+                sb.Append(ch);
+            }
+            return sb;
+        }
+
+        private static StringBuilder AppendSuffix (this StringBuilder sb, ref String? constantSuffix, Boolean addSpaceBeforeSuffix) {
+            if (constantSuffix is not null) {
+                sb.Append('"');
+                if (addSpaceBeforeSuffix) {
+                    sb.Append(' ');
+                }
+                sb.Append(constantSuffix).Append('"');
+            }
+            return sb;
+        }
+
+        private static IXLStyle ApplyNumberFormat (this IXLStyle style, StringBuilder sb) {
+            return style.NumberFormat.SetFormat(sb.ToString());
+        }
+
+        /// <summary>
+        /// Decimal part will always be displayed.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantSuffix"></param>
+        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyNumericNumberFormat (this IXLStyle style, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return style.ApplyNumberFormat(
+                new StringBuilder("#,##0.")
+                    .AppendDecimalPart(numberOfDecimalPlaces, hideTrailingZerosInDecimalPart)
+                    .AppendSuffix(ref constantSuffix, addSpaceBeforeSuffix)
+            );
+        }
+
+        private static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Boolean isInteger, Int32 numberOfDecimalPlaces, ref String? constantSuffix, Boolean addSpaceBeforeSuffix, Boolean hideTrailingZerosInDecimalPart) {
+            var sb = new StringBuilder("#,##0");
+            if (!isInteger) {
+                sb.Append('.').AppendDecimalPart(numberOfDecimalPlaces, hideTrailingZerosInDecimalPart);
+            }
+            return style.ApplyNumberFormat(
+                sb.AppendSuffix(ref constantSuffix, addSpaceBeforeSuffix)
+            );
+        }
+
+        /// <summary>
+        /// Decimal part will be displayed if needed.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantSuffix"></param>
+        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Single? value, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return value is null
+                ? style
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantSuffix, addSpaceBeforeSuffix, hideTrailingZerosInDecimalPart);
+        }
+
+        /// <summary>
+        /// Decimal part will be displayed if needed.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantSuffix"></param>
+        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Double? value, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return value is null
+                ? style
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantSuffix, addSpaceBeforeSuffix, hideTrailingZerosInDecimalPart);
+        }
+
+        /// <summary>
+        /// Decimal part will be displayed if needed.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantSuffix"></param>
+        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return value is null
+                ? style
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantSuffix, addSpaceBeforeSuffix, hideTrailingZerosInDecimalPart);
+        }
     }
 }
