@@ -526,13 +526,17 @@ namespace ClosedXML.Excel
             return sb;
         }
 
-        private static StringBuilder AppendSuffix (this StringBuilder sb, ref String? constantSuffix, Boolean addSpaceBeforeSuffix) {
-            if (constantSuffix is not null) {
-                sb.Append('"');
-                if (addSpaceBeforeSuffix) {
+        private static StringBuilder AppendConstantText (this StringBuilder sb, ref String? constantText, Boolean constantTextIsASuffix, Boolean separateTextWithASpace) {
+            if (constantText is not null) {
+                if (separateTextWithASpace && constantTextIsASuffix) {
                     sb.Append(' ');
                 }
-                sb.Append(constantSuffix).Append('"');
+                foreach (var ch in constantText) {
+                    sb.Append('\\').Append(ch);
+                }
+                if (separateTextWithASpace && !constantTextIsASuffix) {
+                    sb.Append(' ');
+                }
             }
             return sb;
         }
@@ -546,26 +550,36 @@ namespace ClosedXML.Excel
         /// </summary>
         /// <param name="style"></param>
         /// <param name="numberOfDecimalPlaces"></param>
-        /// <param name="constantSuffix"></param>
-        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
         /// <returns></returns>
-        public static IXLStyle ApplyNumericNumberFormat (this IXLStyle style, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
-            return style.ApplyNumberFormat(
-                new StringBuilder("#,##0.")
-                    .AppendDecimalPart(numberOfDecimalPlaces, hideTrailingZerosInDecimalPart)
-                    .AppendSuffix(ref constantSuffix, addSpaceBeforeSuffix)
-            );
+        public static IXLStyle ApplyNumericNumberFormat (this IXLStyle style, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            var sb = new StringBuilder();
+            if (!constantTextIsASuffix) {
+                sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
+            }
+            sb.Append("#,##0.").AppendDecimalPart(numberOfDecimalPlaces, hideTrailingZerosInDecimalPart);
+            if (constantTextIsASuffix) {
+                sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
+            }
+            return style.ApplyNumberFormat(sb);
         }
 
-        private static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Boolean isInteger, Int32 numberOfDecimalPlaces, ref String? constantSuffix, Boolean addSpaceBeforeSuffix, Boolean hideTrailingZerosInDecimalPart) {
-            var sb = new StringBuilder("#,##0");
+        private static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Boolean isInteger, Int32 numberOfDecimalPlaces, ref String? constantText, Boolean constantTextIsASuffix, Boolean separateTextWithASpace, Boolean hideTrailingZerosInDecimalPart) {
+            var sb = new StringBuilder();
+            if (!constantTextIsASuffix) {
+                sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
+            }
+            sb.Append("#,##0");
             if (!isInteger) {
                 sb.Append('.').AppendDecimalPart(numberOfDecimalPlaces, hideTrailingZerosInDecimalPart);
             }
-            return style.ApplyNumberFormat(
-                sb.AppendSuffix(ref constantSuffix, addSpaceBeforeSuffix)
-            );
+            if (constantTextIsASuffix) {
+                sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
+            }
+            return style.ApplyNumberFormat(sb);
         }
 
         /// <summary>
@@ -574,14 +588,15 @@ namespace ClosedXML.Excel
         /// <param name="style"></param>
         /// <param name="value"></param>
         /// <param name="numberOfDecimalPlaces"></param>
-        /// <param name="constantSuffix"></param>
-        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Single? value, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Single? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
             return value is null
                 ? style
-                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantSuffix, addSpaceBeforeSuffix, hideTrailingZerosInDecimalPart);
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart);
         }
 
         /// <summary>
@@ -590,14 +605,15 @@ namespace ClosedXML.Excel
         /// <param name="style"></param>
         /// <param name="value"></param>
         /// <param name="numberOfDecimalPlaces"></param>
-        /// <param name="constantSuffix"></param>
-        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Double? value, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Double? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
             return value is null
                 ? style
-                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantSuffix, addSpaceBeforeSuffix, hideTrailingZerosInDecimalPart);
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart);
         }
 
         /// <summary>
@@ -606,14 +622,15 @@ namespace ClosedXML.Excel
         /// <param name="style"></param>
         /// <param name="value"></param>
         /// <param name="numberOfDecimalPlaces"></param>
-        /// <param name="constantSuffix"></param>
-        /// <param name="addSpaceBeforeSuffix"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantSuffix = null, Boolean addSpaceBeforeSuffix = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
             return value is null
                 ? style
-                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantSuffix, addSpaceBeforeSuffix, hideTrailingZerosInDecimalPart);
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart);
         }
     }
 }
