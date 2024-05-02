@@ -541,8 +541,13 @@ namespace ClosedXML.Excel
             return sb;
         }
 
-        private static IXLStyle ApplyNumberFormat (this IXLStyle style, StringBuilder sb) {
-            return style.NumberFormat.SetFormat(sb.ToString());
+        private static IXLStyle ApplyNumberFormat (this IXLStyle style, StringBuilder sb, ref String? colorFormatStringTpl) {
+            var formatString = sb.ToString();
+            return style.NumberFormat.SetFormat(
+                colorFormatStringTpl is null
+                    ? formatString
+                    : String.Format(colorFormatStringTpl, formatString)
+            );
         }
 
         /// <summary>
@@ -554,8 +559,9 @@ namespace ClosedXML.Excel
         /// <param name="constantTextIsASuffix"></param>
         /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <param name="colorFormatStringTpl">e.g. "{0};[Color3]-{0};[Color15]{0}"</param>
         /// <returns></returns>
-        public static IXLStyle ApplyNumericNumberFormat (this IXLStyle style, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyNumericNumberFormat (this IXLStyle style, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false, String? colorFormatStringTpl = null) {
             var sb = new StringBuilder();
             if (!constantTextIsASuffix) {
                 sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
@@ -564,10 +570,10 @@ namespace ClosedXML.Excel
             if (constantTextIsASuffix) {
                 sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
             }
-            return style.ApplyNumberFormat(sb);
+            return style.ApplyNumberFormat(sb, ref colorFormatStringTpl);
         }
 
-        private static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Boolean isInteger, Int32 numberOfDecimalPlaces, ref String? constantText, Boolean constantTextIsASuffix, Boolean separateTextWithASpace, Boolean hideTrailingZerosInDecimalPart) {
+        private static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Boolean isInteger, Int32 numberOfDecimalPlaces, ref String? constantText, Boolean constantTextIsASuffix, Boolean separateTextWithASpace, Boolean hideTrailingZerosInDecimalPart, ref String? colorFormatStringTpl) {
             var sb = new StringBuilder();
             if (!constantTextIsASuffix) {
                 sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
@@ -579,7 +585,7 @@ namespace ClosedXML.Excel
             if (constantTextIsASuffix) {
                 sb.AppendConstantText(ref constantText, constantTextIsASuffix, separateTextWithASpace);
             }
-            return style.ApplyNumberFormat(sb);
+            return style.ApplyNumberFormat(sb, ref colorFormatStringTpl);
         }
 
         /// <summary>
@@ -592,11 +598,12 @@ namespace ClosedXML.Excel
         /// <param name="constantTextIsASuffix"></param>
         /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <param name="colorFormatStringTpl">e.g. "{0};[Color3]-{0};[Color15]{0}"</param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Single? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Single? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false, String? colorFormatStringTpl = null) {
             return value is null
                 ? style
-                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart);
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart, ref colorFormatStringTpl);
         }
 
         /// <summary>
@@ -609,11 +616,12 @@ namespace ClosedXML.Excel
         /// <param name="constantTextIsASuffix"></param>
         /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <param name="colorFormatStringTpl">e.g. "{0};[Color3]-{0};[Color15]{0}"</param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Double? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Double? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false, String? colorFormatStringTpl = null) {
             return value is null
                 ? style
-                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart);
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart, ref colorFormatStringTpl);
         }
 
         /// <summary>
@@ -626,11 +634,12 @@ namespace ClosedXML.Excel
         /// <param name="constantTextIsASuffix"></param>
         /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <param name="colorFormatStringTpl">e.g. "{0};[Color3]-{0};[Color15]{0}"</param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false, String? colorFormatStringTpl = null) {
             return value is null
                 ? style
-                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart);
+                : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart, ref colorFormatStringTpl);
         }
     }
 }
