@@ -706,7 +706,7 @@ namespace ClosedXML.Excel
         /// <param name="separateTextWithASpace"></param>
         /// <param name="hideTrailingZerosInDecimalPart"></param>
         /// <returns></returns>
-        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+        public static IXLStyle ApplyAmountNumberFormatColored (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
             return ApplyAmountNumberFormat(
                 style: style,
                 value: value,
