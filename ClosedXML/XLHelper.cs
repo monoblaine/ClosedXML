@@ -18,6 +18,7 @@ namespace ClosedXML.Excel
         public const int MaxColumnNumber = 16384;
         public const String MaxColumnLetter = "XFD";
         public const Double Epsilon = 1e-10;
+        private const String DefaultColorFormatString = "{0};[Color3]-{0};[Color15]{0}";
 
         public static Encoding NoBomUTF8 = new UTF8Encoding(false);
 
@@ -551,6 +552,28 @@ namespace ClosedXML.Excel
         }
 
         /// <summary>
+        /// Decimal part will always be displayed. DefaultColorFormatString will be used as colorFormatStringTpl.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyNumericNumberFormatColored (this IXLStyle style, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return ApplyNumericNumberFormat(
+                style: style,
+                numberOfDecimalPlaces: numberOfDecimalPlaces,
+                constantText: constantText,
+                constantTextIsASuffix: constantTextIsASuffix,
+                separateTextWithASpace: separateTextWithASpace,
+                hideTrailingZerosInDecimalPart: hideTrailingZerosInDecimalPart,
+                colorFormatStringTpl: DefaultColorFormatString
+            );
+        }
+
+        /// <summary>
         /// Decimal part will always be displayed.
         /// </summary>
         /// <param name="style"></param>
@@ -589,6 +612,30 @@ namespace ClosedXML.Excel
         }
 
         /// <summary>
+        /// Decimal part will be displayed if needed. DefaultColorFormatString will be used as colorFormatStringTpl.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormatColored (this IXLStyle style, Single? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return ApplyAmountNumberFormat(
+                style: style,
+                value: value,
+                numberOfDecimalPlaces: numberOfDecimalPlaces,
+                constantText: constantText,
+                constantTextIsASuffix: constantTextIsASuffix,
+                separateTextWithASpace: separateTextWithASpace,
+                hideTrailingZerosInDecimalPart: hideTrailingZerosInDecimalPart,
+                colorFormatStringTpl: DefaultColorFormatString
+            );
+        }
+
+        /// <summary>
         /// Decimal part will be displayed if needed.
         /// </summary>
         /// <param name="style"></param>
@@ -607,6 +654,30 @@ namespace ClosedXML.Excel
         }
 
         /// <summary>
+        /// Decimal part will be displayed if needed. DefaultColorFormatString will be used as colorFormatStringTpl.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormatColored (this IXLStyle style, Double? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return ApplyAmountNumberFormat(
+                style: style,
+                value: value,
+                numberOfDecimalPlaces: numberOfDecimalPlaces,
+                constantText: constantText,
+                constantTextIsASuffix: constantTextIsASuffix,
+                separateTextWithASpace: separateTextWithASpace,
+                hideTrailingZerosInDecimalPart: hideTrailingZerosInDecimalPart,
+                colorFormatStringTpl: DefaultColorFormatString
+            );
+        }
+
+        /// <summary>
         /// Decimal part will be displayed if needed.
         /// </summary>
         /// <param name="style"></param>
@@ -622,6 +693,30 @@ namespace ClosedXML.Excel
             return value is null
                 ? style
                 : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart, ref colorFormatStringTpl);
+        }
+
+        /// <summary>
+        /// Decimal part will be displayed if needed. DefaultColorFormatString will be used as colorFormatStringTpl.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="numberOfDecimalPlaces"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <param name="hideTrailingZerosInDecimalPart"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Decimal? value, Int32 numberOfDecimalPlaces, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, Boolean hideTrailingZerosInDecimalPart = false) {
+            return ApplyAmountNumberFormat(
+                style: style,
+                value: value,
+                numberOfDecimalPlaces: numberOfDecimalPlaces,
+                constantText: constantText,
+                constantTextIsASuffix: constantTextIsASuffix,
+                separateTextWithASpace: separateTextWithASpace,
+                hideTrailingZerosInDecimalPart: hideTrailingZerosInDecimalPart,
+                colorFormatStringTpl: DefaultColorFormatString
+            );
         }
 
         /// <summary>
