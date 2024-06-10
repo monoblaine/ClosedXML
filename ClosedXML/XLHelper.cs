@@ -736,5 +736,91 @@ namespace ClosedXML.Excel
                 ? style
                 : style.ApplyAmountNumberFormat(value.Value.IsInteger(), numberOfDecimalPlaces, ref constantText, constantTextIsASuffix, separateTextWithASpace, hideTrailingZerosInDecimalPart, ref colorFormatStringTpl);
         }
+
+        /// <summary>
+        /// DefaultColorFormatString will be used as colorFormatStringTpl.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormatColored (this IXLStyle style, Int32? value, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true) {
+            return ApplyAmountNumberFormat(
+                style: style,
+                value: value,
+                constantText: constantText,
+                constantTextIsASuffix: constantTextIsASuffix,
+                separateTextWithASpace: separateTextWithASpace,
+                colorFormatStringTpl: DefaultColorFormatString
+            );
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <param name="colorFormatStringTpl">e.g. "{0};[Color3]-{0};[Color15]{0}"</param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Int32? value, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, String? colorFormatStringTpl = null) {
+            return value is null
+                ? style
+                : style.ApplyAmountNumberFormat(
+                    isInteger: true,
+                    numberOfDecimalPlaces: 0,
+                    constantText: ref constantText,
+                    constantTextIsASuffix: constantTextIsASuffix,
+                    separateTextWithASpace: separateTextWithASpace,
+                    hideTrailingZerosInDecimalPart: true,
+                    colorFormatStringTpl: ref colorFormatStringTpl
+                );
+        }
+
+        /// <summary>
+        /// DefaultColorFormatString will be used as colorFormatStringTpl.
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormatColored (this IXLStyle style, Int64? value, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true) {
+            return ApplyAmountNumberFormat(
+                style: style,
+                value: value,
+                constantText: constantText,
+                constantTextIsASuffix: constantTextIsASuffix,
+                separateTextWithASpace: separateTextWithASpace,
+                colorFormatStringTpl: DefaultColorFormatString
+            );
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="value"></param>
+        /// <param name="constantText"></param>
+        /// <param name="constantTextIsASuffix"></param>
+        /// <param name="separateTextWithASpace"></param>
+        /// <param name="colorFormatStringTpl">e.g. "{0};[Color3]-{0};[Color15]{0}"</param>
+        /// <returns></returns>
+        public static IXLStyle ApplyAmountNumberFormat (this IXLStyle style, Int64? value, String? constantText = null, Boolean constantTextIsASuffix = true, Boolean separateTextWithASpace = true, String? colorFormatStringTpl = null) {
+            return value is null
+                ? style
+                : style.ApplyAmountNumberFormat(
+                    isInteger: true,
+                    numberOfDecimalPlaces: 0,
+                    constantText: ref constantText,
+                    constantTextIsASuffix: constantTextIsASuffix,
+                    separateTextWithASpace: separateTextWithASpace,
+                    hideTrailingZerosInDecimalPart: true,
+                    colorFormatStringTpl: ref colorFormatStringTpl
+                );
+        }
     }
 }
